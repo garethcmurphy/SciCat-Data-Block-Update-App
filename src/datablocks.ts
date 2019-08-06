@@ -1,5 +1,4 @@
 class FixBlocks {
-  api_url = "https://scicatapi.esss.dk/api/v3";
 
 
 
