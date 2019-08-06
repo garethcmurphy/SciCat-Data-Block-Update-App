@@ -1,4 +1,3 @@
-import { GetH5Info } from "./GetH5Info";
 
 import { lstatSync, readdirSync, statSync } from "fs";
 
@@ -73,4 +72,10 @@ export class FilesInfo {
     };
     return fileEntry;
   }
+}
+
+
+if (require.main === module) {
+  const fix = new FilesInfo("demo/nicos_00000490.hdf");
+  console.log(fix.files)
 }

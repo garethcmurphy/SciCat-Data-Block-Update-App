@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { FilesInfo } from "../src/filesinfo";
+import { FilesInfo } from "../src/FilesInfo";
 
 describe("check files", () => {
   it("should have property files", () => {
