@@ -1,0 +1,24 @@
+{
+  "name": "scicatorigdatablocks",
+  "version": "1.0.0",
+  "description": "fix scicat datablocks",
+  "main": "index.ts",
+  "scripts": {
+    "test": "mocha -r ts-node/register test/*.spec.ts",
+    "start": "npx ts-node ./datablocks.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-v3.0",
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.6.9",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0",
+    "prettier": "^1.18.2",
+    "tslint": "^5.18.0"
+  }
+}
