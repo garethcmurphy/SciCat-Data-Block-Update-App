@@ -27,7 +27,7 @@ class ReplaceOrig {
   async postToScicat() {
     await this.login();
     const search = new SearchScicat();
-    const tag = "nicos_00000490";
+    const tag = "nicos_00000489";
     const results = await search.search(tag);
     const result = results[0];
     const uri = this.base_url;
@@ -36,7 +36,8 @@ class ReplaceOrig {
     // delete old orig for pid
     this.deleteOldOrig(pid);
     // fetch file info
-    const fileInfo = new FilesInfo("demo/nicos_00000490.hdf");
+    const path = result["sourceFolder"]
+    const fileInfo = new FilesInfo(path+"/"+tag+".hdf");
     const info = fileInfo.files;
     console.log(info);
     // add new orig
