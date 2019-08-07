@@ -16,6 +16,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@types/node": "^12.6.9",
+    "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
