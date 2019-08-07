@@ -24,7 +24,6 @@ class ReplaceOrig {
   }
 
   async postToScicat(tag: string) {
-    await this.login();
     const search = new SearchScicat();
     const results = await search.search(tag);
     const result = results[0];
@@ -82,12 +81,13 @@ class ReplaceOrig {
       json: true,
       rejectUnauthorized: false
     };
-    const reponse = request.post(options3);
+    const response = request.post(options3);
     console.log(response);
     
   }
 
-  loop() {
+  async loop() {
+    await this.login();
     let tag = "nicos_00000488";
     for (let step = 488; step < 489; step++) {
       tag = "nicos_00000" + step.toString();
