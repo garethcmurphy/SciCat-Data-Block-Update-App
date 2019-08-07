@@ -82,7 +82,9 @@ class ReplaceOrig {
       json: true,
       rejectUnauthorized: false
     };
-    request.post(options3);
+    const reponse = request.post(options3);
+    console.log(response);
+    
   }
 
   loop() {
