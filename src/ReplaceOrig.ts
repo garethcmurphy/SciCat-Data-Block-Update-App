@@ -23,10 +23,9 @@ class ReplaceOrig {
     this.token = response.id;
   }
 
-  async postToScicat() {
+  async postToScicat(tag: string) {
     await this.login();
     const search = new SearchScicat();
-    const tag = "nicos_00000489";
     const results = await search.search(tag);
     const result = results[0];
     const uri = this.base_url;
@@ -35,8 +34,8 @@ class ReplaceOrig {
     // delete old orig for pid
     this.deleteOldOrig(pid);
     // fetch file info
-    const path = result["sourceFolder"]
-    const fileInfo = new FilesInfo(path+"/"+tag+".hdf");
+    const path = result["sourceFolder"];
+    const fileInfo = new FilesInfo(path + "/" + tag + ".hdf");
     const info = fileInfo.files;
     console.log(info);
     // add new orig
@@ -85,9 +84,17 @@ class ReplaceOrig {
     };
     request.post(options3);
   }
+
+  loop() {
+    let tag = "nicos_00000488";
+    for (let step = 461; step < 488; step++) {
+      tag = "nicos_00000" + step.toString();
+      this.postToScicat(tag);
+    }
+  }
 }
 
 if (require.main === module) {
   const fix = new ReplaceOrig();
-  fix.postToScicat();
+  fix.loop();
 }
