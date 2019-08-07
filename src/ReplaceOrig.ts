@@ -8,7 +8,8 @@ class ReplaceOrig {
   token = "";
 
   async login() {
-    const config = fs.readFileSync("config.json");
+    const rawdata = fs.readFileSync("config.json", "utf-8");
+    const config = JSON.parse(rawdata);
     const uri = this.base_url + "/Users/login";
     const loginOptions = {
       uri: uri,
@@ -19,13 +20,12 @@ class ReplaceOrig {
       requestCert: true
     };
     const response = await request.post(loginOptions);
-    console.log(response)
+    console.log(response);
     this.token = response.id;
-    
   }
 
   async postToScicat() {
-    await this.login()
+    await this.login();
     const search = new SearchScicat();
     const tag = "nicos_00000490";
     const results = await search.search(tag);
@@ -34,7 +34,7 @@ class ReplaceOrig {
     const pid = result["pid"];
     console.log("pid: ", pid);
     // delete old orig for pid
-    this.delete_old_orig(pid);
+    this.deleteOldOrig(pid);
     // fetch file info
     const fileInfo = new FilesInfo("demo/nicos_00000490.hdf");
     const info = fileInfo.files;
@@ -43,19 +43,25 @@ class ReplaceOrig {
     this.add_new_orig(pid, info);
   }
 
-  delete_old_orig(pid: string) {
+  deleteOldOrig(pid: string) {
     const delete_uri =
       this.base_url +
       "/Datasets/" +
       encodeURIComponent(pid) +
-      "/origdatablocks";
-    // const response = request.delete(delete_uri);
-    console.log("deleting", delete_uri);
+      "/origdatablocks?access_token=" +
+      this.token;
+    const deleteOptions = {
+      uri: delete_uri,
+      rejectUnauthorized: false,
+      requestCert: true
+    };
+    const response = request.delete(deleteOptions);
+    console.log("deleting", response);
   }
 
   add_new_orig(pid: string, fileinfo: Object) {
     const orig = {
-      size: 0,
+      size: fileinfo[0]["size"],
       dataFileList: fileinfo,
       ownerGroup: "ess",
       accessGroups: ["loki"],
@@ -66,7 +72,7 @@ class ReplaceOrig {
       this.base_url +
       "/Datasets/" +
       encodeURIComponent(pid) +
-      "/origdatablocks" +
+      "/origdatablocks?access_token=" +
       this.token;
     console.log("adding new orig", pid);
     console.log("adding new orig", uri);
