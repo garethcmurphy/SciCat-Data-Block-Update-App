@@ -1,6 +1,6 @@
 import * as request from "request-promise";
 
-class SearchScicat {
+export class SearchScicat {
   api_url = "https://scicatapi.esss.dk/api/v3/";
 
     encoder(filter: Object) {
@@ -20,7 +20,8 @@ class SearchScicat {
           encodeFilter + "&limits=" + encodeLimit;
     const response = await request.get(uri);
     const array = JSON.parse(response);
-    console.log(array.pop());
+    console.log("pop array " , array.pop());
+    return array;
   }
 }
 

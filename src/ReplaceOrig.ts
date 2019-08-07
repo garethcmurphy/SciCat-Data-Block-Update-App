@@ -1,18 +1,22 @@
 import * as request from "request-promise";
-import { FilesInfo } from "./filesinfo";
+import { FilesInfo } from "./FilesInfo";
+import { SearchScicat } from "./SearchScicat";
 
 class ReplaceOrig {
   base_url = "https://scicatapi.esss.dk/api/v3";
   token = "";
 
-  postToScicat() {
+  async postToScicat() {
+    const search = new SearchScicat()
+    const tag = "nicos_00000490";
+    const results = await search.search(tag);
+    console.log("results", results);
     const uri = this.base_url;
-    request.get(uri);
-    const pid = "";
+    const pid = "test";
     // delete old orig for pid
     this.delete_old_orig(pid);
     // fetch file info
-    const fileInfo = new FilesInfo("demo/nexus_00000490.hdf");
+    const fileInfo = new FilesInfo("demo/nicos_00000490.hdf");
     const info = fileInfo.files;
     console.log(info);
     // add new orig
@@ -51,4 +55,5 @@ class ReplaceOrig {
 
 if (require.main === module) {
   const fix = new ReplaceOrig();
+  fix.postToScicat()
 }
