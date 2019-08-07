@@ -87,7 +87,7 @@ class ReplaceOrig {
 
   loop() {
     let tag = "nicos_00000488";
-    for (let step = 393; step < 431; step++) {
+    for (let step = 488; step < 489; step++) {
       tag = "nicos_00000" + step.toString();
       this.postToScicat(tag);
     }
