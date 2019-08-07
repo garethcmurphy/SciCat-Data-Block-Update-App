@@ -16,8 +16,7 @@ class ReplaceOrig {
       method: "PUT",
       body: config,
       json: true,
-      rejectUnauthorized: false,
-      requestCert: true
+      rejectUnauthorized: false
     };
     const response = await request.post(loginOptions);
     console.log(response);
@@ -53,8 +52,7 @@ class ReplaceOrig {
       this.token;
     const deleteOptions = {
       uri: delete_uri,
-      rejectUnauthorized: false,
-      requestCert: true
+      rejectUnauthorized: false
     };
     const response = request.delete(deleteOptions);
     console.log("deleting", response);
@@ -83,8 +81,7 @@ class ReplaceOrig {
       method: "PUT",
       body: orig,
       json: true,
-      rejectUnauthorized: false,
-      requestCert: true
+      rejectUnauthorized: false
     };
     request.post(options3);
   }
