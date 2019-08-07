@@ -1,5 +1,5 @@
 import * as request from "request-promise";
-import { FilesInfo } from "./FilesInfo";
+import { FilesInfo } from "./FileInfo";
 import { SearchScicat } from "./SearchScicat";
 import * as fs from "fs";
 
