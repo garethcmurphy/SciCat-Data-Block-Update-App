@@ -1,18 +1,38 @@
 import * as request from "request-promise";
 import { FilesInfo } from "./FilesInfo";
 import { SearchScicat } from "./SearchScicat";
+import * as fs from "fs";
 
 class ReplaceOrig {
   base_url = "https://scicatapi.esss.dk/api/v3";
   token = "";
 
+  async login() {
+    const config = fs.readFileSync("config.json");
+    const uri = this.base_url + "/Users/login";
+    const loginOptions = {
+      uri: uri,
+      method: "PUT",
+      body: config,
+      json: true,
+      rejectUnauthorized: false,
+      requestCert: true
+    };
+    const response = await request.post(loginOptions);
+    console.log(response)
+    this.token = response.id;
+    
+  }
+
   async postToScicat() {
-    const search = new SearchScicat()
+    await this.login()
+    const search = new SearchScicat();
     const tag = "nicos_00000490";
     const results = await search.search(tag);
-    console.log("results", results);
+    const result = results[0];
     const uri = this.base_url;
-    const pid = "test";
+    const pid = result["pid"];
+    console.log("pid: ", pid);
     // delete old orig for pid
     this.delete_old_orig(pid);
     // fetch file info
@@ -49,11 +69,21 @@ class ReplaceOrig {
       "/origdatablocks" +
       this.token;
     console.log("adding new orig", pid);
-    console.log("adding new orig", orig);
+    console.log("adding new orig", uri);
+
+    let options3 = {
+      url: uri,
+      method: "PUT",
+      body: orig,
+      json: true,
+      rejectUnauthorized: false,
+      requestCert: true
+    };
+    request.post(options3);
   }
 }
 
 if (require.main === module) {
   const fix = new ReplaceOrig();
-  fix.postToScicat()
+  fix.postToScicat();
 }

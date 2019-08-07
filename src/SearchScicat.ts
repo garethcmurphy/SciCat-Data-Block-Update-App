@@ -20,7 +20,6 @@ export class SearchScicat {
           encodeFilter + "&limits=" + encodeLimit;
     const response = await request.get(uri);
     const array = JSON.parse(response);
-    console.log("pop array " , array.pop());
     return array;
   }
 }
