@@ -88,8 +88,8 @@ class ReplaceOrig {
 
   async loop() {
     await this.login();
-    let tag = "nicos_00000488";
-    for (let step = 488; step < 489; step++) {
+    let tag = "nicos_00000489";
+    for (let step = 488; step < 490; step++) {
       tag = "nicos_00000" + step.toString();
       this.postToScicat(tag);
     }
