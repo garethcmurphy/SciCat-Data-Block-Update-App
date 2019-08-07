@@ -2,11 +2,11 @@
 import { lstatSync, readdirSync, statSync } from "fs";
 
 export class FilesInfo {
-  files = [];
-  fileNumber = 1;
   experimentDateTime = new Date();
-  totalFileSize = 0;
+  fileNumber = 1;
+  files = [];
   sourceFolder = "source_folder";
+  totalFileSize = 0;
 
   constructor(source_folder: string) {
     //this.getDirInfo(source_folder);
