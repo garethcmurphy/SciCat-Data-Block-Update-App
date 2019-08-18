@@ -4,11 +4,26 @@
   "description": "fix scicat datablocks",
   "main": "index.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register test/*.spec.ts",
+    "test": "nyc --reporter=text mocha -r ts-node/register tests/*.spec.ts",
     "start": "npx ts-node ./src/ReplaceOrig.ts"
   },
   "keywords": [],
   "author": "",
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.spec.ts",
+      "shared/sdk/**"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/garethcmurphy/scicatorigdatablocks.git"
@@ -26,6 +41,7 @@
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
