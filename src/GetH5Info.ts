@@ -35,7 +35,7 @@ export class GetH5Info {
         const starttimeBuffer = h5lt.readDatasetAsBuffer(
           entryGroup.id,
           "start_time",
-          {count: [25]}
+          { count: [25] }
         );
         console.log("start_time buffer length", starttimeBuffer.length);
         console.log("ascii string", starttimeBuffer.toString("ascii"));
