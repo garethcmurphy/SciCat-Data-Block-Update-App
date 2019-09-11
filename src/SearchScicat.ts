@@ -1,7 +1,13 @@
 import * as request from "request-promise";
+import { GetApi } from "./GetAPI";
 
 export class SearchScicat {
-  api_url = "https://scicatapi.esss.dk/api/v3/";
+  api_url: string;
+
+  constructor() {
+    const api = new GetApi();
+    this.api_url = api.get();
+  }
 
     encoder(filter: Object) {
       const string = JSON.stringify(filter);

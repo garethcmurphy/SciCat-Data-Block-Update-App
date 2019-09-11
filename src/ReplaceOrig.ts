@@ -2,10 +2,17 @@ import * as request from "request-promise";
 import { FilesInfo } from "./FileInfo";
 import { SearchScicat } from "./SearchScicat";
 import * as fs from "fs";
+import { GetApi } from "./GetAPI";
 
 class ReplaceOrig {
-  base_url = "https://scicatapi.esss.dk/api/v3";
+  base_url: string;
   token = "";
+
+  constructor() {
+    const api = new GetApi();
+
+    this.base_url = api.get();
+  }
 
   async login() {
     const rawdata = fs.readFileSync("config.json", "utf-8");
@@ -83,7 +90,6 @@ class ReplaceOrig {
     };
     const response = request.post(options3);
     console.log(response);
-    
   }
 
   async loop() {
