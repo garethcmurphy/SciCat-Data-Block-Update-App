@@ -1,4 +1,3 @@
-
 import { lstatSync, readdirSync, statSync } from "fs";
 
 export class FilesInfo {
@@ -21,7 +20,7 @@ export class FilesInfo {
       this.getDirInfo(path);
     } else {
       console.log("is file");
-      const fileEntry= this.getFileInfo(path);
+      const fileEntry = this.getFileInfo(path);
       this.files.push(fileEntry);
       this.totalFileSize = fileEntry.size;
       this.fileNumber = 1;
@@ -74,8 +73,7 @@ export class FilesInfo {
   }
 }
 
-
 if (require.main === module) {
   const fix = new FilesInfo("demo/nicos_00000490.hdf");
-  console.log(fix.files)
+  console.log(fix.files);
 }
