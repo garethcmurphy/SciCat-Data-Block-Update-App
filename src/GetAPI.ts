@@ -5,7 +5,7 @@ export class GetApi {
 
   constructor() {
     this.api_url = "https://scitest.esss.lu.se/api/v3";
-    this.api_url = "https://scicat.esss.se/api/v3";
+    // this.api_url = "https://scicat.esss.se/api/v3";
   }
 
   get() {
